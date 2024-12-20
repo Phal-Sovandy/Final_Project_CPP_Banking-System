@@ -10,7 +10,7 @@
 class Customer
 {
 private:
-    int accountNumber; // Store 5 digits number
+    int accountNumber; // Store 4 digits number
     std::string fullName;
     bool sex; // 0 for Male, 1 for Female
     Date *dateOfBirth;
@@ -84,7 +84,9 @@ public:
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "Invalid Amount\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     void withdrawal(float amount)
@@ -96,7 +98,9 @@ public:
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "Invalid Amount\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
 
@@ -112,16 +116,19 @@ public:
                 this->investment = nullptr;
 
                 this->history->push("Withdraw Investment", this->balance);
-
             }
             else
             {
+                std::cout << "----------------------------------------------------------\n";
                 std::cout << "Invalid Withdrawal\n";
+                std::cout << "----------------------------------------------------------\n";
             }
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "No investment information available\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     void payForBorrow(int today)
@@ -139,26 +146,32 @@ public:
                     this->balance -= this->borrow->monthlyPay;
 
                     this->history->push("Loan Payment", this->balance);
-
                 }
             }
-            else{
+            else
+            {
+                std::cout << "----------------------------------------------------------\n";
                 std::cout << "Invalid Payment Date\n";
+                std::cout << "----------------------------------------------------------\n";
             }
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "No loan information available\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     float showBalance()
     {
         return this->balance;
     }
-    void showHistory(){
+    void showHistory()
+    {
         this->history->printHistory();
     }
-    void peekHistory(){
+    void peekHistory()
+    {
         this->history->peek();
     }
 };
@@ -280,7 +293,10 @@ public:
             {
                 if (temp->getAccNumber() == accountNumber)
                 {
+                    std::cout << "----------------------------------------------------------\n";
                     std::cout << "Account number already exists!\n";
+                    std::cout << "----------------------------------------------------------\n";
+
                     exist = true;
                     break;
                 }
@@ -294,7 +310,9 @@ public:
             }
             else
             {
+                std::cout << "----------------------------------------------------------\n";
                 std::cout << "Customer already exist\n";
+                std::cout << "----------------------------------------------------------\n";
             }
         }
     }
@@ -334,7 +352,9 @@ public:
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "No customer in the list\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     void SearchCustomerByAccNumber(int accountNumber)
@@ -347,13 +367,15 @@ public:
         if (temp)
         {
             std::cout << "----------------------------------------------------------";
-            std::cout << '\n' << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << std::setw(10) << "Gender" << std::setw(15) << "Date of Birth" << '\n';
+            std::cout << '\n'
+                      << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << std::setw(10) << "Gender" << std::setw(15) << "Date of Birth" << '\n';
             std::cout << "----------------------------------------------------------\n";
-            std::cout << std::left << std::setw(15) << temp->getAccNumber() << std::setw(20) << temp->getName() << std::setw(10) << (temp->getSex() ? "Female" : "Male")<< temp->getDateOfBirth()->date << "/" << temp->getDateOfBirth()->month << "/" << temp->getDateOfBirth()->year << '\n';
+            std::cout << std::left << std::setw(15) << temp->getAccNumber() << std::setw(20) << temp->getName() << std::setw(10) << (temp->getSex() ? "Female" : "Male") << temp->getDateOfBirth()->date << "/" << temp->getDateOfBirth()->month << "/" << temp->getDateOfBirth()->year << '\n';
         }
         else
         {
             std::cout << "No customer in the list with account number: " << accountNumber << " found\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     void SearchCustomerByFullName(std::string name)
@@ -364,15 +386,17 @@ public:
             temp = temp->Next;
         }
         if (temp)
-        {   
+        {
             std::cout << "----------------------------------------------------------";
-            std::cout << '\n' << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << std::setw(10) << "Gender" << std::setw(15) << "Date of Birth" << '\n';
+            std::cout << '\n'
+                      << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << std::setw(10) << "Gender" << std::setw(15) << "Date of Birth" << '\n';
             std::cout << "----------------------------------------------------------\n";
-            std::cout << std::left << std::setw(15) << temp->getAccNumber() << std::setw(20) << temp->getName() << std::setw(10) << (temp->getSex() ? "Female" : "Male")<< temp->getDateOfBirth()->date << "/" << temp->getDateOfBirth()->month << "/" << temp->getDateOfBirth()->year << '\n';
+            std::cout << std::left << std::setw(15) << temp->getAccNumber() << std::setw(20) << temp->getName() << std::setw(10) << (temp->getSex() ? "Female" : "Male") << temp->getDateOfBirth()->date << "/" << temp->getDateOfBirth()->month << "/" << temp->getDateOfBirth()->year << '\n';
         }
         else
         {
             std::cout << "No customer in the list with name: " << name << " found\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     Customer *getCustomerByAccNumber(int accountNumber)
@@ -402,10 +426,18 @@ public:
         std::cout << "----------------------------------------------------------";
         std::cout << '\n' << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << std::setw(10) << "Gender" << std::setw(15) << "Date of Birth" << '\n';
         std::cout << "----------------------------------------------------------\n";
-        while (temp)
+
+        if(!temp)
         {
-            std::cout << std::left << std::setw(15) << temp->getAccNumber() << std::setw(20) << temp->getName() << std::setw(10) << (temp->getSex() ? "Female" : "Male")<< temp->getDateOfBirth()->date << "/" << temp->getDateOfBirth()->month << "/" << temp->getDateOfBirth()->year << '\n';
-            temp = temp->Next;
+            std::cout << "No customer in the list\n";
+            std::cout << "----------------------------------------------------------\n";
+        }
+        else{
+            while (temp)
+            {
+                std::cout << std::left << std::setw(15) << temp->getAccNumber() << std::setw(20) << temp->getName() << std::setw(10) << (temp->getSex() ? "Female" : "Male") << temp->getDateOfBirth()->date << "/" << temp->getDateOfBirth()->month << "/" << temp->getDateOfBirth()->year << '\n';
+                temp = temp->Next;
+            }
         }
     }
 };

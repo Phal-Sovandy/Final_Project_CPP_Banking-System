@@ -1,13 +1,15 @@
 #ifndef DSA_History
 #define DSA_History
 #include "DSA_Customer.h"
-class HistoryData{
-    public:
+class HistoryData
+{
+public:
     std::string action = "";
     float balance;
     HistoryData *Next = nullptr;
 
-    HistoryData(std::string action, float balance){
+    HistoryData(std::string action, float balance)
+    {
         this->action = action;
         this->balance = balance;
     }
@@ -58,7 +60,9 @@ public:
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "error occurs: History is empty\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
 
@@ -66,7 +70,8 @@ public:
     {
         std::cout << "\nLatest customer action:\n";
         std::cout << "----------------------------------------------------------";
-        std::cout << '\n' << std::left << std::setw(30) << "Action" << "Balance\n";
+        std::cout << '\n'
+                  << std::left << std::setw(30) << "Action" << "Balance\n";
         std::cout << "----------------------------------------------------------\n";
         if (!isEmpty())
         {
@@ -92,18 +97,21 @@ public:
     {
         std::cout << "\nCustomer's action History:\n";
         std::cout << "----------------------------------------------------------";
-        std::cout << '\n' << std::left << std::setw(30) << "Action" << "Balance\n";
+        std::cout << '\n'
+                  << std::left << std::setw(30) << "Action" << "Balance\n";
         std::cout << "----------------------------------------------------------\n";
-        
+
         HistoryData *temp = this->top;
-        if(!isEmpty()){
+        if (!isEmpty())
+        {
             while (temp)
             {
                 std::cout << std::left << std::setw(30) << temp->action << temp->balance << '\n';
                 temp = temp->Next;
             }
         }
-        else{
+        else
+        {
             std::cout << "No history data available\n";
             std::cout << "----------------------------------------------------------\n";
         }

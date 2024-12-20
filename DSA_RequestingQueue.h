@@ -2,17 +2,20 @@
 #define DSA_Request
 #include <iostream>
 #include "DSA_Customer.h"
-class RequestingData{
-    public:
+class RequestingData
+{
+public:
     Customer *requester = nullptr;
     std::string message = "";
     RequestingData *Next = nullptr;
 
-    RequestingData(Customer *requester, std::string message){
+    RequestingData(Customer *requester, std::string message)
+    {
         this->requester = requester;
         this->message = message;
     }
-    ~RequestingData(){
+    ~RequestingData()
+    {
         delete requester;
         requester = nullptr;
     }
@@ -23,6 +26,7 @@ private:
     RequestingData *front;
     RequestingData *rear;
     int length;
+
 public:
     RequestingQueue()
     {
@@ -69,7 +73,9 @@ public:
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "error occurs: Queue is empty\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     void peek()
@@ -78,13 +84,16 @@ public:
         {
             std::cout << "\nFirst customer request:\n";
             std::cout << "----------------------------------------------------------";
-            std::cout << '\n' << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << "Message\n";
+            std::cout << '\n'
+                      << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << "Message\n";
             std::cout << "----------------------------------------------------------\n";
             std::cout << std::left << std::setw(15) << front->requester->getAccNumber() << std::setw(20) << front->requester->getName() << front->message << '\n';
         }
         else
         {
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "errors occurs: Queue is Empty\n";
+            std::cout << "----------------------------------------------------------\n";
         }
     }
     bool isEmpty()
@@ -100,14 +109,23 @@ public:
     {
         std::cout << "\nPrinting customer requesting queue:\n";
         std::cout << "----------------------------------------------------------";
-        std::cout << '\n' << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name"<< "Message\n";
+        std::cout << '\n'
+                  << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << "Message\n";
         std::cout << "----------------------------------------------------------\n";
 
         RequestingData *temp = front;
-        while (temp)
+        if (!temp)
         {
-            std::cout << std::left << std::setw(15) << temp->requester->getAccNumber() << std::setw(20) << temp->requester->getName() << temp->message << '\n';
-            temp = temp->Next;
+            std::cout << "No customer request available\n";
+            std::cout << "----------------------------------------------------------\n";
+        }
+        else
+        {
+            while (temp)
+            {
+                std::cout << std::left << std::setw(15) << temp->requester->getAccNumber() << std::setw(20) << temp->requester->getName() << temp->message << '\n';
+                temp = temp->Next;
+            }
         }
     }
 };
