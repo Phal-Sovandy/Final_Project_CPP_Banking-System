@@ -16,20 +16,17 @@ public:
 
     Investment(float depositedAmount, int period, int dayNow, int monthNow, int yearNow)
     {
-        if (depositedAmount > 0)
+        this->depositedAmount = depositedAmount;
+        this->period = period;
+        this->totalAmount = depositedAmount * INTERESTRATE * period;
+        this->dayLeft = period * 365;
+        if (dayNow > CountDaysInMonth(monthNow, yearNow))
         {
-            this->depositedAmount = depositedAmount;
-            this->period = period;
-            this->totalAmount = depositedAmount * INTERESTRATE * period;
-            this->dayLeft = period * 365;
-            if (dayNow > CountDaysInMonth(monthNow, yearNow))
-            {
-                dayNow = CountDaysInMonth(monthNow, yearNow);
-            }
-            else
-            {
-                this->dayStart = new Date(dayNow, monthNow, yearNow);
-            }
+            dayNow = CountDaysInMonth(monthNow, yearNow);
+        }
+        else
+        {
+            this->dayStart = new Date(dayNow, monthNow, yearNow);
         }
     }
     ~Investment()
@@ -49,19 +46,22 @@ public:
 
     Borrow(int initialBorrow, int dayNow, int monthNow, int yearNow)
     {
-        if (initialBorrow > 0)
+
+        this->borrowedMoney = initialBorrow;
+        this->monthlyPay = (this->borrowedMoney * ANUALLLYPAY) / 12;
+        if (dayNow >= 30)
         {
-            this->borrowedMoney = initialBorrow;
-            this->monthlyPay = (this->borrowedMoney * ANUALLLYPAY) / 12;
-            if (dayNow >= 30)
-            {
-                this->dayStart = new Date(28, monthNow, yearNow);
-            }
-            else
-            {
-                this->dayStart = new Date(dayNow, monthNow, yearNow);
-            }
+            this->dayStart = new Date(28, monthNow, yearNow);
         }
+        else
+        {
+            this->dayStart = new Date(dayNow, monthNow, yearNow);
+        }
+    }
+    ~Borrow()
+    {
+        delete dayStart;
+        dayStart = nullptr;
     }
 };
 

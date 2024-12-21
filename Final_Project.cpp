@@ -18,6 +18,7 @@ void showBankerMenu()
     std::cout << "8. Show Customer Requesting Queue\n";
     std::cout << "9. Show Customer History Data Stack\n";
     std::cout << "0. Exit\n";
+    std::cout << "----------------------------------------------------------\n";
 }
 
 void showCustomerMenu()
@@ -32,6 +33,7 @@ void showCustomerMenu()
     std::cout << "6. Show History\n";
     std::cout << "7. Send Request\n";
     std::cout << "0. Exit\n";
+    std::cout << "----------------------------------------------------------\n";
 }
 
 int main()
@@ -42,19 +44,23 @@ int main()
     CustomerList *customerList = new CustomerList();
     RequestingQueue *requestingQueue = new RequestingQueue();
 
-    // Testing for Customer role
     /*
+    // Testing for Customer role
+
     Borrow *borrow = new Borrow(1000, 1, 1, 2021);                                                       // initialBorrow, dayNow, monthNow, yearNow
     Investment *investment = new Investment(1000, 10, 1, 1, 2021);                                       // initialMoney, period, dayNow, monthNow, yearNow
     customerList->AddCustomer(1234, "John Doe", false, new Date(1, 1, 2000), 2000, investment, borrow); // accountNumber, fullName, sex, dateOfBirth, balance, investment, borrow
-    */
+    
 
-   //Testing Requesting Queue (Run the Testing for Customer role first)
-    /*
+   //Testing Requesting Queue
+    
     Customer *customer = customerList->getCustomerByAccNumber(1234);
     RequestingData *request = new RequestingData(customer, "I want to withdraw my investment");
     requestingQueue->enqueue(request);
+    customer->deposit(1000);
+
     */
+    
 
 
     std::cout << "\n==========================================================\n";
@@ -131,7 +137,7 @@ int main()
                 Date *dateOfBirth = new Date(day, month, year);
 
                 char borrowOrInvestChoice;
-                std::cout << "Does the customer want to borrow, invest, both, or none? (b for Borrow, i for Invest, t for Both, n for None): ";
+                std::cout << std::setw(20) << "Does the customer want to borrow, invest, both, or none? (b for Borrow, i for Invest, t for Both, n for None): ";
                 std::cin >> borrowOrInvestChoice;
 
                 Borrow *borrow = nullptr;
@@ -336,18 +342,18 @@ int main()
                 case 3:
                 {
                     // Investment Withdrawal
-                    customer->withdrawInvestment(CURRENT_DAY_FROM_YEAR1900);
+                    customer->withdrawInvestment(CURRENT_DAY_FROM_YEAR1900); // Change the CURRENT_DAY_FROM_YEAR1900 at line '42' for a valid withdrawal
                     break;
                 }
                 case 4:
                 {
                     // Loan Payment
-                    customer->payForBorrow(CURRENT_DAY_FROM_YEAR1900);
+                    customer->payForBorrow(CURRENT_DAY_FROM_YEAR1900); // Change the CURRENT_DAY_FROM_YEAR1900 at line '42' for a valid loan payment
                     break;
                 }
                 case 5:
                     // show balance
-                    std::cout << "Your Balance: " << customer->showBalance() << "\n";
+                    std::cout << "Your Balance: " << std::fixed << std::setprecision(3) << customer->showBalance() << "\n";
                     break;
                 case 6:
                     // show history
@@ -398,6 +404,18 @@ int main()
         std::cout << "Invalid role selected.\n";
         std::cout << "----------------------------------------------------------\n";
     }
+
+    delete customerList;
+    delete requestingQueue;
+
+    //If testing for Customer role and testing for Requesting Queue
+    
+    /*
+    delete borrow;
+    delete investment;
+    delete customer;
+    delete request;
+    */
 
     return 0;
 }

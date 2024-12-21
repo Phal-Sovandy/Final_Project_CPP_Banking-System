@@ -59,6 +59,7 @@ public:
             borrow = nullptr;
         }
     }
+    
     int getAccNumber()
     {
         return this->accountNumber;
@@ -75,12 +76,14 @@ public:
     {
         return this->dateOfBirth;
     }
+    
     void deposit(float amount)
     {
         if (amount >= 0)
         {
             this->balance += amount;
             this->history->push("Deposit", this->balance);
+            std::cout << "Deposit Successful\n";
         }
         else
         {
@@ -95,6 +98,7 @@ public:
         {
             this->balance -= amount;
             this->history->push("Withdrawal", this->balance);
+            std::cout << "Withdrawal Successful\n";
         }
         else
         {
@@ -103,7 +107,6 @@ public:
             std::cout << "----------------------------------------------------------\n";
         }
     }
-
     void withdrawInvestment(int currentDay)
     {
         if (this->investment)
@@ -116,6 +119,7 @@ public:
                 this->investment = nullptr;
 
                 this->history->push("Withdraw Investment", this->balance);
+                std::cout << "Withdraw Investment Successful\n";
             }
             else
             {
@@ -147,6 +151,7 @@ public:
 
                     this->history->push("Loan Payment", this->balance);
                 }
+                std::cout << "Loan Payment Successful\n";
             }
             else
             {
@@ -231,7 +236,7 @@ private:
     }
     Customer *GetMiddle(Customer *head)
     {
-        if (!head)
+        if (!head || !head->Next)
         {
             return head;
         }
@@ -286,6 +291,7 @@ public:
         {
             this->Head = newCustomer;
             this->customersCount++;
+            std::cout << "Customer added successfully\n";
         }
         else
         {
@@ -307,6 +313,7 @@ public:
             {
                 temp->Next = newCustomer;
                 this->customersCount++;
+                std::cout << "Customer added successfully\n";
             }
             else
             {
@@ -328,6 +335,7 @@ public:
                 delete temp;
                 temp = nullptr;
                 this->customersCount--;
+                std::cout << "Customer removed successfully\n";
             }
             else
             {
@@ -343,6 +351,7 @@ public:
                     prev->Next = temp->Next;
                     delete temp;
                     this->customersCount--;
+                    std::cout << "Customer removed successfully\n";
                 }
                 else
                 {
@@ -399,6 +408,7 @@ public:
             std::cout << "----------------------------------------------------------\n";
         }
     }
+    
     Customer *getCustomerByAccNumber(int accountNumber)
     {
         Customer *temp = this->Head;
@@ -424,15 +434,17 @@ public:
         Customer *temp = this->Head;
 
         std::cout << "----------------------------------------------------------";
-        std::cout << '\n' << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << std::setw(10) << "Gender" << std::setw(15) << "Date of Birth" << '\n';
+        std::cout << '\n'
+                  << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << std::setw(10) << "Gender" << std::setw(15) << "Date of Birth" << '\n';
         std::cout << "----------------------------------------------------------\n";
 
-        if(!temp)
+        if (!temp)
         {
             std::cout << "No customer in the list\n";
             std::cout << "----------------------------------------------------------\n";
         }
-        else{
+        else
+        {
             while (temp)
             {
                 std::cout << std::left << std::setw(15) << temp->getAccNumber() << std::setw(20) << temp->getName() << std::setw(10) << (temp->getSex() ? "Female" : "Male") << temp->getDateOfBirth()->date << "/" << temp->getDateOfBirth()->month << "/" << temp->getDateOfBirth()->year << '\n';
