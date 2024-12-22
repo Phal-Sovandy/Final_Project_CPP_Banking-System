@@ -76,7 +76,10 @@ public:
     {
         return this->dateOfBirth;
     }
-    
+    float getBalance()
+    {
+        return this->balance;
+    }
     void deposit(float amount)
     {
         if (amount >= 0)
@@ -199,10 +202,6 @@ public:
     {
         this->balance += balance;
         this->history->push("Recived from " + std::to_string(senderAccNumber), this->balance);
-    }
-    float getBalance()
-    {
-        return this->balance;
     }
     void showHistory()
     {
