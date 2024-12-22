@@ -80,6 +80,7 @@ public:
     {
         return this->balance;
     }
+    
     void deposit(float amount)
     {
         if (amount >= 0)
@@ -305,10 +306,21 @@ public:
             delete temp;
         }
     }
+    
     Customer *peek()
     {
         return this->Head;
     }
+    Customer *getCustomerByAccNumber(int accountNumber)
+    {
+        Customer *temp = this->Head;
+        while (temp && temp->getAccNumber() != accountNumber)
+        {
+            temp = temp->Next;
+        }
+        return temp ? temp : nullptr;
+    }
+    
     void AddCustomer(int accountNumber, std::string fullName, bool sex, Date *dateOfBirth, float balance, Investment *investment, Borrow *borrow)
     {
         Customer *temp = this->Head;
@@ -351,7 +363,6 @@ public:
             }
         }
     }
-
     void RemoveCustomer(int accountNumber)
     {
         Customer *temp = this->Head;
@@ -436,16 +447,7 @@ public:
             std::cout << "----------------------------------------------------------\n";
         }
     }
-    
-    Customer *getCustomerByAccNumber(int accountNumber)
-    {
-        Customer *temp = this->Head;
-        while (temp && temp->getAccNumber() != accountNumber)
-        {
-            temp = temp->Next;
-        }
-        return temp ? temp : nullptr;
-    }
+       
     // These sort function will sort in ascending order
     void SortByName()
     {
