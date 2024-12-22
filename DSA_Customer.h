@@ -139,7 +139,15 @@ public:
     {
         if (this->borrow)
         {
-            if (today == this->borrow->dayStart->date)
+            if(this->borrow->borrowedMoney == 0){
+                    std::cout << "----------------------------------------------------------\n";
+                    std::cout << "No Loan left to pay\n";
+                    std::cout << "----------------------------------------------------------\n";
+                    delete this->borrow;
+                    this->borrow = nullptr;
+                    this->history->push("Loan Paid", this->balance);
+            }
+            else if (today == this->borrow->dayStart->date)
             {
                 if (this->balance < this->borrow->monthlyPay)
                 {
@@ -148,7 +156,12 @@ public:
                 else
                 {
                     this->balance -= this->borrow->monthlyPay;
-
+                    this->borrow->borrowedMoney -= this->borrow->monthlyPay;
+                    if(this->borrow->borrowedMoney <= 0){
+                        delete this->borrow->dayStart;
+                        delete this->borrow;
+                        this->borrow = nullptr;
+                    }
                     this->history->push("Loan Payment", this->balance);
                 }
                 std::cout << "Loan Payment Successful\n";
@@ -194,10 +207,6 @@ public:
     void showHistory()
     {
         this->history->printHistory();
-    }
-    void peekHistory()
-    {
-        this->history->peek();
     }
 };
 

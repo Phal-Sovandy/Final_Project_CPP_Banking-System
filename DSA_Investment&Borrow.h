@@ -4,6 +4,7 @@
 #include "DSA_Date.h"
 #define INTERESTRATE 0.05
 #define ANUALLLYPAY 0.2
+#define INTERESTRATE_FOR_BORROW 0.05
 
 class Investment
 {
@@ -47,7 +48,7 @@ public:
     Borrow(int initialBorrow, int dayNow, int monthNow, int yearNow)
     {
 
-        this->borrowedMoney = initialBorrow;
+        this->borrowedMoney = (initialBorrow + 1) * INTERESTRATE_FOR_BORROW; // INTERESTRATE_FOR_BORROW (interest rate)
         this->monthlyPay = (this->borrowedMoney * ANUALLLYPAY) / 12;
         if (dayNow >= 30)
         {
