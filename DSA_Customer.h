@@ -167,7 +167,27 @@ public:
             std::cout << "----------------------------------------------------------\n";
         }
     }
-    float showBalance()
+    void transferToOthers(int reciverAccNumber, float amount){
+        if (amount <= this->balance && amount >= 0)
+        {
+            this->balance -= amount;
+            this->history->push("Transfer to " + std::to_string(reciverAccNumber), this->balance);
+            std::cout << "Transfer Successful\n";
+        }
+        else
+        {
+            std::cout << "----------------------------------------------------------\n";
+            std::cout << "Invalid Amount\n";
+            std::cout << "----------------------------------------------------------\n";
+        }
+    }
+    // Add balance to the customer for transfering action
+    void reciverBalance(int senderAccNumber, float balance)
+    {
+        this->balance += balance;
+        this->history->push("Recived from " + std::to_string(senderAccNumber), this->balance);
+    }
+    float getBalance()
     {
         return this->balance;
     }

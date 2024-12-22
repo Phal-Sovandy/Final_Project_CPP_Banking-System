@@ -29,9 +29,10 @@ void showCustomerMenu()
     std::cout << "2. Withdrawal\n";
     std::cout << "3. Withdrawal Investment\n";
     std::cout << "4. Loan Payment\n";
-    std::cout << "5. Show Balance\n";
-    std::cout << "6. Show History\n";
-    std::cout << "7. Send Request\n";
+    std::cout << "5. Transfer to Others\n";
+    std::cout << "6. Show Balance\n";
+    std::cout << "7. Show History\n";
+    std::cout << "8. Send Request\n";
     std::cout << "0. Exit\n";
     std::cout << "----------------------------------------------------------\n";
 }
@@ -44,13 +45,15 @@ int main()
     CustomerList *customerList = new CustomerList();
     RequestingQueue *requestingQueue = new RequestingQueue();
 
-    /*
-    // Testing for Customer role
-
-    Borrow *borrow = new Borrow(1000, 1, 1, 2021);                                                       // initialBorrow, dayNow, monthNow, yearNow
-    Investment *investment = new Investment(1000, 10, 1, 1, 2021);                                       // initialMoney, period, dayNow, monthNow, yearNow
-    customerList->AddCustomer(1234, "John Doe", false, new Date(1, 1, 2000), 2000, investment, borrow); // accountNumber, fullName, sex, dateOfBirth, balance, investment, borrow
     
+    // Testing for Customer role
+    /*
+    Borrow *borrow = new Borrow(1000, 1, 1, 2021);                      // initialBorrow, dayBorrow, monthBorrow, yearBorrow
+    Investment *investment = new Investment(1000, 10, 1, 1, 2021);      // initialMoney, period, dayInvest, monthInvest, yearInvest
+    Date *date1 = new Date(1, 1, 2007);
+    Date *date2 = new Date(25, 9, 2007);                                   
+    customerList->AddCustomer(1234, "John Doe", true, date1, 2000, investment, borrow); // accountNumber, fullName, sex, dateOfBirth, balance, investment, borrow
+    customerList->AddCustomer(5678, "John Mayer", false, date2, 1000, nullptr, nullptr);
 
    //Testing Requesting Queue
     
@@ -58,8 +61,8 @@ int main()
     RequestingData *request = new RequestingData(customer, "I want to withdraw my investment");
     requestingQueue->enqueue(request);
     customer->deposit(1000);
-
     */
+    
     
 
 
@@ -352,14 +355,43 @@ int main()
                     break;
                 }
                 case 5:
-                    // show balance
-                    std::cout << "Your Balance: " << std::fixed << std::setprecision(3) << customer->showBalance() << "\n";
+                {
+                    // Transfer to Others
+                    int reciverAccNumber;
+                    float amount;
+                    std::cout << "Enter receiver account number: ";
+                    std::cin >> reciverAccNumber;
+                    std::cout << "Enter transfer amount: ";
+                    std::cin >> amount;
+                    if(reciverAccNumber == customer->getAccNumber()){
+                        std::cout << "----------------------------------------------------------\n";
+                        std::cout << "Invalid Transfer. You can't transfer to yourself.\n";
+                        std::cout << "----------------------------------------------------------\n";
+                        break;
+                    }else{
+                        Customer *reciverAcc = customerList->getCustomerByAccNumber(reciverAccNumber);
+                        if(!reciverAcc){
+                            std::cout << "----------------------------------------------------------\n";
+                            std::cout << "Invalid Transfer. Receiver account not found.\n";
+                            std::cout << "----------------------------------------------------------\n";
+                            break;
+                        }else{
+                            customer->transferToOthers(reciverAccNumber, amount);
+                            customerList->getCustomerByAccNumber(reciverAccNumber)->reciverBalance(customer->getAccNumber(), amount);
+                        }
+                    }
+
                     break;
+                }
                 case 6:
+                    // show balance
+                    std::cout << "Your Balance: " << std::fixed << std::setprecision(3) << customer->getBalance() << "\n";
+                    break;
+                case 7:
                     // show history
                     customer->showHistory();
                     break;
-                case 7:
+                case 8:
                 {
                     // Send Request
                     std::string requestMessage;
@@ -415,6 +447,8 @@ int main()
     delete investment;
     delete customer;
     delete request;
+    delete date1;
+    delete date2;
     */
 
     return 0;
