@@ -78,24 +78,7 @@ public:
             std::cout << "----------------------------------------------------------\n";
         }
     }
-    void peek()
-    {
-        if (!isEmpty())
-        {
-            std::cout << "\nFirst customer request:\n";
-            std::cout << "----------------------------------------------------------";
-            std::cout << '\n'
-                      << std::left << std::setw(15) << "Account No" << std::setw(20) << "Name" << "Message\n";
-            std::cout << "----------------------------------------------------------\n";
-            std::cout << std::left << std::setw(15) << front->requester->getAccNumber() << std::setw(20) << front->requester->getName() << front->message << '\n';
-        }
-        else
-        {
-            std::cout << "----------------------------------------------------------\n";
-            std::cout << "errors occurs: Queue is Empty\n";
-            std::cout << "----------------------------------------------------------\n";
-        }
-    }
+
     bool isEmpty()
     {
         return this->length == 0;
