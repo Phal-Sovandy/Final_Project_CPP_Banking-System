@@ -195,7 +195,7 @@ public:
         }
     }
     // Add balance to the customer for transfering action
-    void reciverBalance(int senderAccNumber, float balance)
+    void reciverBalance(int senderAccNumber, float amount)
     {
         this->balance += balance;
         this->history->push("Recived from " + std::to_string(senderAccNumber), this->balance);
