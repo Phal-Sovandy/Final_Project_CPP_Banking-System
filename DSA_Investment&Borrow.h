@@ -42,7 +42,6 @@ class Borrow
 public:
     int borrowedMoney = 0;
     Date *dayStart = nullptr;
-    int dayLeft = 0;
     float monthlyPay = 0;
 
     Borrow(int initialBorrow, int dayNow, int monthNow, int yearNow)
