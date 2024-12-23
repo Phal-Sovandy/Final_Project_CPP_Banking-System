@@ -16,7 +16,8 @@ void showBankerMenu()
     std::cout << "6. Sort Customer List By Full Name\n";
     std::cout << "7. Sort Customer List By Date Of Birth\n";
     std::cout << "8. Show Customer Requesting Queue\n";
-    std::cout << "9. Show Customer History Data Stack\n";
+    std::cout << "9. Remove the first request from the queue\n";
+    std::cout << "10. Show Customer History Data Stack\n";
     std::cout << "0. Exit\n";
     std::cout << "----------------------------------------------------------\n";
 }
@@ -47,7 +48,7 @@ int main()
 
     
     // Testing for Customer role
-    /*
+    
     Borrow *borrow = new Borrow(1000, 1, 1, 2021);                      // initialBorrow, dayBorrow, monthBorrow, yearBorrow
     Investment *investment = new Investment(1000, 10, 1, 1, 2021);      // initialMoney, period, dayInvest, monthInvest, yearInvest
     Date *date1 = new Date(1, 1, 2007);
@@ -61,7 +62,7 @@ int main()
     RequestingData *request = new RequestingData(customer, "I want to withdraw my investment");
     requestingQueue->enqueue(request);
     customer->deposit(1000);
-    */
+    
     
     
 
@@ -269,6 +270,12 @@ int main()
                 break;
             }
             case 9:
+            {
+                // Remove the first request from the queue
+                requestingQueue->dequeue();
+                break;
+            }
+            case 10:
             {
                 // Show Customer History Data Stack
                 int accNumber;

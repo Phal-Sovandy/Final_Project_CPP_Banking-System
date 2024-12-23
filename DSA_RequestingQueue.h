@@ -70,6 +70,9 @@ public:
                 front = nullptr;
                 rear = nullptr;
             }
+            std::cout << "----------------------------------------------------------\n";
+            std::cout << "Request has been removed from queue\n";
+            std::cout << "----------------------------------------------------------\n";
         }
         else
         {
