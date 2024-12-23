@@ -34,12 +34,15 @@ public:
         rear = nullptr;
         length = 0;
     }
+    // Destructor is not important since we delete the customer list already so the customer will be deleted in main program
     ~RequestingQueue()
     {
         while (!isEmpty())
         {
             dequeue();
         }
+        front = nullptr;
+        rear = nullptr;
     }
     void enqueue(RequestingData *requestingData)
     {
