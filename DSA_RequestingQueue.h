@@ -62,9 +62,7 @@ public:
     {
         if (!isEmpty())
         {
-            RequestingData *temp = front;
             front = front->Next;
-            delete temp;
 
             this->length--;
 
@@ -87,7 +85,7 @@ public:
 
     bool isEmpty()
     {
-        return this->length == 0;
+        return this->front == nullptr;
     }
     int size()
     {
