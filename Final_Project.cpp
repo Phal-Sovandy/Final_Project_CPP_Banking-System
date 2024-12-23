@@ -46,26 +46,21 @@ int main()
     CustomerList *customerList = new CustomerList();
     RequestingQueue *requestingQueue = new RequestingQueue();
 
-    
     // Testing for Customer role
-    
-    Borrow *borrow = new Borrow(1000, 1, 1, 2021);                      // initialBorrow, dayBorrow, monthBorrow, yearBorrow
-    Investment *investment = new Investment(1000, 10, 1, 1, 2021);      // initialMoney, period, dayInvest, monthInvest, yearInvest
+
+    Borrow *borrow = new Borrow(1000, 1, 1, 2021);                 // initialBorrow, dayBorrow, monthBorrow, yearBorrow
+    Investment *investment = new Investment(1000, 10, 1, 1, 2021); // initialMoney, period, dayInvest, monthInvest, yearInvest
     Date *date1 = new Date(1, 1, 2007);
-    Date *date2 = new Date(25, 9, 2007);                                   
+    Date *date2 = new Date(25, 9, 2007);
     customerList->AddCustomer(1234, "John Doe", true, date1, 2000, investment, borrow); // accountNumber, fullName, sex, dateOfBirth, balance, investment, borrow
     customerList->AddCustomer(5678, "John Mayer", false, date2, 1000, nullptr, nullptr);
 
-   //Testing Requesting Queue
-    
+    // Testing Requesting Queue
+
     Customer *customer = customerList->getCustomerByAccNumber(1234);
     RequestingData *request = new RequestingData(customer, "I want to withdraw my investment");
     requestingQueue->enqueue(request);
     customer->deposit(1000);
-    
-    
-    
-
 
     std::cout << "\n==========================================================\n";
     std::cout << "                     BANKING SYSTEM\n";
@@ -370,19 +365,25 @@ int main()
                     std::cin >> reciverAccNumber;
                     std::cout << "Enter transfer amount: ";
                     std::cin >> amount;
-                    if(reciverAccNumber == customer->getAccNumber()){
+                    if (reciverAccNumber == customer->getAccNumber())
+                    {
                         std::cout << "----------------------------------------------------------\n";
                         std::cout << "Invalid Transfer. You can't transfer to yourself.\n";
                         std::cout << "----------------------------------------------------------\n";
                         break;
-                    }else{
+                    }
+                    else
+                    {
                         Customer *reciverAcc = customerList->getCustomerByAccNumber(reciverAccNumber);
-                        if(!reciverAcc){
+                        if (!reciverAcc)
+                        {
                             std::cout << "----------------------------------------------------------\n";
                             std::cout << "Invalid Transfer. Receiver account not found.\n";
                             std::cout << "----------------------------------------------------------\n";
                             break;
-                        }else{
+                        }
+                        else
+                        {
                             customer->transferToOthers(reciverAccNumber, amount);
                             customerList->getCustomerByAccNumber(reciverAccNumber)->reciverBalance(customer->getAccNumber(), amount);
                         }
@@ -409,10 +410,6 @@ int main()
                     RequestingData *request = new RequestingData(customer, requestMessage);
 
                     requestingQueue->enqueue(request);
-
-                    std::cout << "----------------------------------------------------------\n";
-                    std::cout << "Your request has been sent.\n";
-                    std::cout << "----------------------------------------------------------\n";
                     break;
                 }
                 case 0:
@@ -447,8 +444,8 @@ int main()
     delete customerList;
     delete requestingQueue;
 
-    //If testing for Customer role and testing for Requesting Queue
-    
+    // If testing for Customer role and testing for Requesting Queue
+
     /*
     delete borrow;
     delete investment;

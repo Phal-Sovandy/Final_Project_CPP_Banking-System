@@ -59,7 +59,7 @@ public:
             borrow = nullptr;
         }
     }
-    
+
     int getAccNumber()
     {
         return this->accountNumber;
@@ -80,14 +80,16 @@ public:
     {
         return this->balance;
     }
-    
+
     void deposit(float amount)
     {
         if (amount >= 0)
         {
             this->balance += amount;
             this->history->push("Deposit", this->balance);
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "Deposit Successful\n";
+            std::cout << "----------------------------------------------------------\n";
         }
         else
         {
@@ -102,7 +104,9 @@ public:
         {
             this->balance -= amount;
             this->history->push("Withdrawal", this->balance);
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "Withdrawal Successful\n";
+            std::cout << "----------------------------------------------------------\n";
         }
         else
         {
@@ -123,7 +127,9 @@ public:
                 this->investment = nullptr;
 
                 this->history->push("Withdraw Investment", this->balance);
+                std::cout << "----------------------------------------------------------\n";
                 std::cout << "Withdraw Investment Successful\n";
+                std::cout << "----------------------------------------------------------\n";
             }
             else
             {
@@ -143,13 +149,14 @@ public:
     {
         if (this->borrow)
         {
-            if(this->borrow->borrowedMoney == 0){
-                    std::cout << "----------------------------------------------------------\n";
-                    std::cout << "No Loan left to pay\n";
-                    std::cout << "----------------------------------------------------------\n";
-                    delete this->borrow;
-                    this->borrow = nullptr;
-                    this->history->push("Loan Paid", this->balance);
+            if (this->borrow->borrowedMoney == 0)
+            {
+                std::cout << "----------------------------------------------------------\n";
+                std::cout << "No Loan left to pay\n";
+                std::cout << "----------------------------------------------------------\n";
+                delete this->borrow;
+                this->borrow = nullptr;
+                this->history->push("Loan Paid", this->balance);
             }
             else if (today == this->borrow->dayStart->date)
             {
@@ -161,14 +168,17 @@ public:
                 {
                     this->balance -= this->borrow->monthlyPay;
                     this->borrow->borrowedMoney -= this->borrow->monthlyPay;
-                    if(this->borrow->borrowedMoney <= 0){
+                    if (this->borrow->borrowedMoney <= 0)
+                    {
                         delete this->borrow->dayStart;
                         delete this->borrow;
                         this->borrow = nullptr;
                     }
                     this->history->push("Loan Payment", this->balance);
                 }
+                std::cout << "----------------------------------------------------------\n";
                 std::cout << "Loan Payment Successful\n";
+                std::cout << "----------------------------------------------------------\n";
             }
             else
             {
@@ -184,12 +194,15 @@ public:
             std::cout << "----------------------------------------------------------\n";
         }
     }
-    void transferToOthers(int reciverAccNumber, float amount){
+    void transferToOthers(int reciverAccNumber, float amount)
+    {
         if (amount <= this->balance && amount >= 0)
         {
             this->balance -= amount;
             this->history->push("Transfer to " + std::to_string(reciverAccNumber), this->balance);
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "Transfer Successful\n";
+            std::cout << "----------------------------------------------------------\n";
         }
         else
         {
@@ -306,7 +319,7 @@ public:
             delete temp;
         }
     }
-    
+
     Customer *peek()
     {
         return this->Head;
@@ -320,7 +333,7 @@ public:
         }
         return temp ? temp : nullptr;
     }
-    
+
     void AddCustomer(int accountNumber, std::string fullName, bool sex, Date *dateOfBirth, float balance, Investment *investment, Borrow *borrow)
     {
         Customer *temp = this->Head;
@@ -331,7 +344,9 @@ public:
         {
             this->Head = newCustomer;
             this->customersCount++;
+            std::cout << "----------------------------------------------------------\n";
             std::cout << "Customer added successfully\n";
+            std::cout << "----------------------------------------------------------\n";
         }
         else
         {
@@ -353,7 +368,9 @@ public:
             {
                 temp->Next = newCustomer;
                 this->customersCount++;
+                std::cout << "----------------------------------------------------------\n";
                 std::cout << "Customer added successfully\n";
+                std::cout << "----------------------------------------------------------\n";
             }
             else
             {
@@ -374,7 +391,9 @@ public:
                 delete temp;
                 temp = nullptr;
                 this->customersCount--;
+                std::cout << "----------------------------------------------------------\n";
                 std::cout << "Customer removed successfully\n";
+                std::cout << "----------------------------------------------------------\n";
             }
             else
             {
@@ -390,7 +409,9 @@ public:
                     prev->Next = temp->Next;
                     delete temp;
                     this->customersCount--;
+                    std::cout << "----------------------------------------------------------\n";
                     std::cout << "Customer removed successfully\n";
+                    std::cout << "----------------------------------------------------------\n";
                 }
                 else
                 {
@@ -447,7 +468,7 @@ public:
             std::cout << "----------------------------------------------------------\n";
         }
     }
-       
+
     // These sort function will sort in ascending order
     void SortByName()
     {

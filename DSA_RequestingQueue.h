@@ -54,6 +54,9 @@ public:
             rear = requestingData;
         }
         this->length++;
+        std::cout << "----------------------------------------------------------\n";
+        std::cout << "Request has been sent\n";
+        std::cout << "----------------------------------------------------------\n";
     }
     void dequeue()
     {

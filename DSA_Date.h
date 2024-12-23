@@ -8,7 +8,7 @@ bool IsLeapYear(int year)
 }
 int CountLeapYear(int year)
 {
-    //count leap year from 1900 to given year
+    // count leap year from 1900 to given year
     return (year - 1900) / 4 - (year - 1900) / 100 + (year - 1900) / 400;
 }
 int CountDaysInMonth(int month, int year)
