@@ -47,7 +47,7 @@ int main()
     RequestingQueue *requestingQueue = new RequestingQueue();
 
     // Testing for Customer role
-
+    /*
     Borrow *borrow = new Borrow(1000, 1, 1, 2021);                 // initialBorrow, dayBorrow, monthBorrow, yearBorrow
     Investment *investment = new Investment(1000, 10, 1, 1, 2021); // initialMoney, period, dayInvest, monthInvest, yearInvest
     Date *date1 = new Date(1, 1, 2007);
@@ -61,6 +61,7 @@ int main()
     RequestingData *request = new RequestingData(customer, "I want to withdraw my investment");
     requestingQueue->enqueue(request);
     customer->deposit(1000);
+    */
 
     std::cout << "\n==========================================================\n";
     std::cout << "                     BANKING SYSTEM\n";
