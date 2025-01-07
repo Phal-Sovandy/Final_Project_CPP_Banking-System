@@ -130,6 +130,8 @@ public:
                 std::cout << "----------------------------------------------------------\n";
                 std::cout << "Withdraw Investment Successful\n";
                 std::cout << "----------------------------------------------------------\n";
+                delete this->investment;
+                this->investment = nullptr;
             }
             else
             {
