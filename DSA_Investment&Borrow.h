@@ -19,7 +19,7 @@ public:
     {
         this->depositedAmount = depositedAmount;
         this->period = period;
-        this->totalAmount = depositedAmount * (INTERESTRATE * period + 1);
+        this->totalAmount = depositedAmount * (INTERESTRATE * period + 1); // I = PRT (simple interest), totalAmount = I + Principle
         this->dayLeft = period * 365;
         if (dayNow > CountDaysInMonth(monthNow, yearNow))
         {
